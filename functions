@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 log() {
-    echo "$(date +"[%Y-%m-%d %T,%3N]") <docker-entrypoint> $*"
+    echo -e "$(date +"[%Y-%m-%d %T,%3N]") <docker-entrypoint> $*"
 }
 
 set_java_home() {

@@ -32,6 +32,7 @@ else
     CERTTEMPFILE=$(mktemp)
     TMPLIST+=" ${CERTTEMPFILE}"
     CERTURI=$(openssl x509 -noout -ocsp_uri -in "${CERTDIR}/${CERTNAME}")
+    log "${CERTDIR}/${CERTNAME} OSCP URI:${CERTURI}"
     # Identrust cross-signed CA cert needed by the java keystore for import.
     # Can get original here: https://www.identrust.com/certificates/trustid/root-download-x3.html
     cat > "${CERTTEMPFILE}" <<'_EOF'
@@ -76,7 +77,8 @@ _EOF
     else
         awk 1 "${CERTDIR}/chain.pem" "${CERTDIR}/${CERTNAME}" >> "${CHAIN}"
     fi
-   openssl pkcs12 -export  -passout pass:aircontrolenterprise \
+    log "New Chain:\n$(cat $CHAIN)"
+    openssl pkcs12 -export  -passout pass:aircontrolenterprise \
         -in "${CHAIN}" \
         -inkey "${CERTDIR}/${CERT_PRIVATE_NAME}" \
         -out "${TEMPFILE}" -name unifi

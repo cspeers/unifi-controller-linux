@@ -32,6 +32,7 @@ ENV BASEDIR=/usr/lib/unifi \
 RUN echo "**** install pre-requisites ****" && \
     apt-get update && \
     apt-get install -qy --no-install-recommends \
+        apt-utils \
         ca-certificates \
         dirmngr \
         gpg \
@@ -70,7 +71,7 @@ RUN set -ex \
 
 RUN echo "**** install ****" && \
     apt-get update && apt-get upgrade -yq && \
-    apt -qy install /tmp/unifi.deb && \
+    apt-get -qy install /tmp/unifi.deb && \
     rm -f /tmp/unifi.deb && \
     chown -R unifi:unifi /usr/lib/unifi && \
     rm -rf /var/lib/apt/lists/* && \
