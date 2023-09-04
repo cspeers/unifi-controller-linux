@@ -2,10 +2,6 @@
 
 . /usr/unifi/functions
 
-if [ -x /usr/local/bin/docker-build.sh ]; then
-    /usr/local/bin/docker-build.sh "${PKGURL}"
-fi
-
 exit_handler() {
     log "Exit signal received, shutting down"
     java -jar ${BASEDIR}/lib/ace.jar stop
@@ -93,8 +89,10 @@ confSet () {
 
 confFile="${DATADIR}/system.properties"
 if [ -e "$confFile" ]; then
+  echo "New CONFIGURATION ${confFile}"
   newfile=false
 else
+  echo "Existing CONFIGURATION ${confFile}"
   newfile=true
 fi
 
@@ -171,8 +169,10 @@ if [[ "${@}" == "unifi" ]]; then
         fi
     done
     for key in "${!settings[@]}"; do
+      echo "Updating ${confFile} $key=${settings[$key]}"
       confSet "$confFile" "$key" "${settings[$key]}"
     done
+    echo "Launch Command:${UNIFI_CMD}"
     if [ "${RUNAS_UID0}" == "true" ] || [ "${CUID}" != "0" ]; then
         if [ "${CUID}" == 0 ]; then
             log 'WARNING: Running UniFi in insecure (root) mode'
