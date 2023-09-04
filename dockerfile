@@ -44,7 +44,7 @@ RUN echo "**** install pre-requisites ****" && \
     dirmngr \
     gpg \
     gpg-agent \
-    openjdk-8-jre-headless \
+    openjdk-11-jre-headless \
     procps \
     libcap2-bin \
     tzdata
