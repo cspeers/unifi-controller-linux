@@ -101,7 +101,12 @@ RUN echo "**** cleanup ****" && apt-get clean
 
 VOLUME ["/unifi", "${RUNDIR}"]
 
-EXPOSE 6789/tcp 8080/tcp 8443/tcp 8880/tcp 8843/tcp 3478/udp
+EXPOSE 6789/tcp 
+EXPOSE 8080/tcp 
+EXPOSE 8443/tcp 
+EXPOSE 8880/tcp 
+EXPOSE 8843/tcp 
+EXPOSE 3478/udp
 
 WORKDIR /unifi
 
