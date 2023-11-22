@@ -44,7 +44,7 @@ JVM_MAX_HEAP_SIZE=${JVM_MAX_HEAP_SIZE:-1024M}
 
 
 MONGOLOCK="${DATAPATH}/db/mongod.lock"
-JVM_EXTRA_OPTS="${JVM_EXTRA_OPTS} -Dunifi.datadir=${DATADIR} -Dunifi.logdir=${LOGDIR} -Dunifi.rundir=${RUNDIR}"
+JVM_EXTRA_OPTS="${JVM_EXTRA_OPTS} -Dunifi.datadir=${DATADIR} -Dunifi.logdir=${LOGDIR} -Dunifi.rundir=${RUNDIR} --add-opens=java.base/java.time=ALL-UNNAMED"
 PIDFILE=/var/run/unifi/unifi.pid
 
 if [ ! -z "${JVM_MAX_HEAP_SIZE}" ]; then
